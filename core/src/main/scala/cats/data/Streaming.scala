@@ -642,8 +642,10 @@ sealed abstract class Streaming[A] extends Product with Serializable { lhs =>
    * Ensure that repeated traversals of the stream will not cause
    * repeated tail computations.
    *
-   * By default stream does not memoize to avoid memory leaks when the
-   * head of the stream is retained.
+   * By default this structure does not memoize to avoid memory leaks
+   * when the head of the stream is retained. However, the user
+   * ultimately has control of the memoization approach based on what
+   * kinds of Eval instances they use.
    */
   def memoize: Streaming[A] =
     this match {
